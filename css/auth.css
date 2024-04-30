@@ -11,6 +11,10 @@
     background: linear-gradient(236deg, rgba(46,147,255,1) 0%, rgba(30,84,141,1) 100%);
 }
 .btn-Register-color{
+    border: 0 !important;
     background: rgb(9,2,105);
     background: linear-gradient(193deg, rgba(9,2,105,1) 0%, rgba(254,37,144,1) 100%);
+}
+.forget_password{
+    margin-left: 5rem !important;
 }

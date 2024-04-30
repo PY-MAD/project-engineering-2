@@ -1,0 +1,59 @@
+*{
+    font-family: "Work Sans";
+}
+a{
+    text-decoration: none;
+}
+.books{
+    background: rgb(254,48,148);
+    background: linear-gradient(90deg, rgba(254,48,148,1) 31%, rgba(130,0,187,1) 100%);
+}
+.clock{
+    background: rgb(46,147,255);
+    background: linear-gradient(83deg, rgba(46,147,255,1) 4%, rgba(118,184,255,1) 57%);
+}
+.cus_game{
+    background: rgb(229,116,144);
+    background: linear-gradient(45deg, rgba(229,116,144,1) 4%, rgba(130,0,187,1) 100%);
+}
+.card_mood{
+    width: 400px;
+    height: 200px;
+    color: white;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    border-radius: 24px;
+}
+.card_mood .text_card{
+    font-size: 32px;
+    font-weight: 600;
+    padding: 0 1.5rem;
+}
+.title{
+    background: rgb(253,52,148);
+    background: linear-gradient(193deg, rgba(253,52,148,1) 0%, rgba(229,116,144,1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 600 !important;
+    font-size: 32px;
+    max-width: 90%;
+}
+.cards{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.appBar{
+    position: sticky;
+    bottom: 10px;
+    left: 0;
+    background-color: white;
+    width: 100%;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-around;
+    align-items: end;
+}
