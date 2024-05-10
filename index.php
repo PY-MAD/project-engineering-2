@@ -33,7 +33,7 @@ include_once "template/navBar.php";
                 </div>
             </div>
             <div class="link_toSignUp">
-                <a href="pages/register.php" class="mb-4 mt-4">
+                <a href="pages/auth/register.php" class="mb-4 mt-4">
                         <button class="btn btn-primary sign_up">SIGN UP !</button>
                 </a>
             </div>

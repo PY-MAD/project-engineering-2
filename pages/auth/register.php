@@ -1,7 +1,23 @@
 <?php 
 $titlePage = "Register";
 include_once $_SERVER['DOCUMENT_ROOT']."/project_eng_2/template/navBar.php";
+include_once $_SERVER['DOCUMENT_ROOT'] . "/project_eng_2/db/connection.php";
 
+?>
+<?php 
+    if($_SERVER['REQUEST_METHOD'] == "POST"){
+        $email = mysqli_escape_string($mysqli, $_POST["email"]);
+        $name = mysqli_escape_string($mysqli, $_POST["name"]);
+        $password = mysqli_escape_string($mysqli, $_POST["password"]);
+        $conf_password = mysqli_escape_string($mysqli, $_POST["conf_password"]);
+        if($password == $conf_password){
+            $newPassword = password_hash($password, PASSWORD_DEFAULT);
+            $mysqli->query("INSERT INTO users(email,name,password) VALUES 
+            ('$email','$name','$newPassword')");
+            header("location:../home/home.php");
+            exit();
+        }
+    }
 ?>
 <link rel="stylesheet" href="../../css/auth.css">
 <body>
@@ -15,7 +31,7 @@ include_once $_SERVER['DOCUMENT_ROOT']."/project_eng_2/template/navBar.php";
                     <input required type="email" name="email" id="login_Email" placeholder="EMAIL" class="form-control fs-5 p-3">
                 </div>
                 <div class="form-group m-auto mb-3">
-                    <input required type="text" name="NAME" id="login_name" placeholder="NAME" class="form-control fs-5 p-3">
+                    <input required type="text" name="name" id="login_name" placeholder="NAME" class="form-control fs-5 p-3">
                 </div>
                 <div class="form-group m-auto mb-3">
                     <input required type="password" name="password" id="login_password" placeholder="PASSWORD" class="form-control fs-5 p-3">

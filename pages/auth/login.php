@@ -1,7 +1,25 @@
 <?php 
 $titlePage = "Login";
 include_once $_SERVER['DOCUMENT_ROOT']."/project_eng_2/template/navBar.php";
+include_once $_SERVER['DOCUMENT_ROOT'] . "/project_eng_2/db/connection.php";
 
+?>
+<?php
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $email = mysqli_escape_string($mysqli, $_POST["email"]);
+        $password = mysqli_escape_string($mysqli, $_POST["password"]);
+        $checkPassword = $mysqli->query("SELECT password from users where email = '$email'")->fetch_assoc()["password"];
+        $check = password_verify($password, $checkPassword);
+        if($check){
+            session_start();
+            $getUser = $mysqli->query("SELECT email , name from users where email = '$email' ")->fetch_assoc();
+            $name = $getUser["name"];
+            $email = $getUser["email"];
+            $_SESSION["name"] = $name;
+            $_SESSION["email"] = $email;
+            header("location: ../home/home.php");
+        }
+    }
 ?>
 <link rel="stylesheet" href="../../css/auth.css">
 <body>

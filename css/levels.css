@@ -21,14 +21,42 @@ a{
     height: 200px;
     color: white;
     display: flex;
-    justify-content: start;
-    align-items: center;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: start;
     border-radius: 24px;
 }
-.card_mood .text_card{
+.right_cards{
+    position: relative;
+}
+
+.card_mood .right_cards .image-level{
+    position: absolute;
+    top: -50px;
+    right: 0;
+}
+.left_cards{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+    height: 100%;
+}
+.left_cards .text_card{
     font-size: 32px;
     font-weight: 600;
     padding: 0 1.5rem;
+}
+.left_cards .image{
+    padding-left: 20px;
+}
+.left_cards .text_level{
+    font-size: 16px;
+    font-weight: 600;
+    padding: 0 1.5rem;
+}
+.left_cards .image img{
+    width: 60px;
 }
 .title{
     background: rgb(253,52,148);
