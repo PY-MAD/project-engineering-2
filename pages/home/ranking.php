@@ -5,6 +5,25 @@ include_once $_SERVER['DOCUMENT_ROOT'] . "/project_eng_2/template/navBar.php";
 ?>
 <link rel="stylesheet" href="../../css/index.css">
 <link rel="stylesheet" href="../../css/home.css">
+<style>
+    main{
+        height: 79.7vh;
+    }
+    .topBar{
+        margin-top: 30px;
+        display: flex;
+        justify-content: space-around;
+    }
+    .topBar a{
+        background-color: #5BAAFF;
+        color: white !important;
+        padding: 10px 16px;
+        border-radius: 12px;
+    }
+    .topBar .active{
+        background-color: #f9690e !important;
+    }
+</style>
 <div class="container">
     <!-- for the settings and profile if logged in -->
     <nav class="d-flex flex-row justify-content-end">
@@ -21,40 +40,10 @@ include_once $_SERVER['DOCUMENT_ROOT'] . "/project_eng_2/template/navBar.php";
     </nav>
     <!-- main -->
     <main>
-        <div class="title">
-            Choose the mood
-        </div>
-        <div class="cards mt-5">
-            <a href="../typeMood/Educational.php" class="mb-5">
-                <div class="card_mood books">
-                    <div class="text_card">
-                        Educational
-                    </div>
-                    <div class="image">
-                        <img src="../../assets/home/books.svg" alt="">
-                    </div>
-                </div>
-            </a>
-            <a href="" class="mb-5">
-                <div class="card_mood clock">
-                    <div class="text_card">
-                        Random game
-                    </div>
-                    <div class="image">
-                        <img src="../../assets/home/clock.svg" alt="">
-                    </div>
-                </div>
-            </a>
-            <a href="" class="mb-5">
-                <div class="card_mood cus_game">
-                    <div class="text_card">
-                        custom game
-                    </div>
-                    <div class="image">
-                        <img src="../../assets/home/humen_custom.svg" alt="">
-                    </div>
-                </div>
-            </a>
+        <div class="topBar">
+            <a class="active">educational</a>
+            <a class="">random</a>
+            <a class="">costume</a>
         </div>
     </main>
 </div>
@@ -74,3 +63,14 @@ include_once $_SERVER['DOCUMENT_ROOT'] . "/project_eng_2/template/navBar.php";
         </a>
     </div>
 </div>
+<script>
+    let ranking_type = document.querySelectorAll(".topBar a");
+    ranking_type.forEach((item)=>{
+        item.addEventListener(("click"),()=>{
+            ranking_type.forEach((item)=>{
+                item.classList.remove("active");
+            })
+            item.classList.add("active");
+        })
+    })
+</script>
