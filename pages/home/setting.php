@@ -1,7 +1,14 @@
 <?php
 $titlePage = "Setting";
 include_once $_SERVER['DOCUMENT_ROOT'] . "/project_eng_2/template/navBar.php";
+include_once $_SERVER['DOCUMENT_ROOT'] . "/project_eng_2/template/checkLogged.php";
+include_once $_SERVER['DOCUMENT_ROOT'] . "/project_eng_2/db/connection.php";
 
+if($_SERVER['REQUEST_METHOD'] == "POST"){
+    $vol = $_POST["vol"];
+    $mysqli->query("UPDATE users SET volumeAudio = $vol where id = ".$_SESSION["userId"]);
+    $_SESSION["vol"] = $vol;
+}
 ?>
 <link rel="stylesheet" href="../../css/index.css">
 <link rel="stylesheet" href="../../css/home.css">
@@ -40,6 +47,19 @@ include_once $_SERVER['DOCUMENT_ROOT'] . "/project_eng_2/template/navBar.php";
         font-size: 24px;
         display: flex;
     }
+    .logout_btn{
+        background-color: #5BAAFF;
+        color: white !important;
+        width: 60% !important;
+        height: 50px !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 600;
+        border-radius: 6px;
+        border: 0;
+        width: 100%;
+    }
 </style>
 <div class="container">
     <!-- for the settings and profile if logged in -->
@@ -57,27 +77,19 @@ include_once $_SERVER['DOCUMENT_ROOT'] . "/project_eng_2/template/navBar.php";
     </nav>
     <!-- main -->
     <main>
-        <div class="volume_text_style">volume: <span id="text_value">100</span>%</div>
-        <input id="volume_btn" type="range" id="vol" name="vol" value="100" min="0" max="100" style="width : 100%;">
+        <form action="" method="post" class="form-group w-100 d-flex flex-column justify-content-center align-items-center">
+            <div class="volume w-100">
+                <div class="volume_text_style">volume: <span id="text_value"><?php echo $_SESSION["vol"] ?></span>%</div>
+                <input id="volume_btn" type="range" id="vol" name="vol" value="<?php echo $_SESSION["vol"] ?>" min="0" max="100" style="width : 100%;">
+            </div>
+            <div class="btn w-100 d-flex justify-content-center">
+                <input type="submit" class="logout_btn mt-5" value="save the volume !">
+            </div>
+        </form>
     </main>
 
 </div>
-<div class="appBar">
-    <div class="cards-appBar">
-        <a href="setting.php">
-            <img class="white" src="../../assets/appBar/setting.svg" alt="">
-        </a>
-        <a href="ranking.php?ranking_type=educational"  style="margin-bottom: 15px;">
-            <img class="white"src="../../assets/appBar/ranking.svg" alt="">
-        </a>
-        <a href="home.php">
-            <img class="white" src="../../assets/appBar/play.svg" alt="">
-        </a>
-        <a href="user.php">
-            <img class="white" src="../../assets/appBar/user.svg" alt="">
-        </a>
-    </div>
-</div>
+<?php include_once "appBar.php" ?>
 
 <script>
     let volume =document.getElementById("volume_btn");
@@ -87,3 +99,5 @@ include_once $_SERVER['DOCUMENT_ROOT'] . "/project_eng_2/template/navBar.php";
     })
 
 </script>
+
+

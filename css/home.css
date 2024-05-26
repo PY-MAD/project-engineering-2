@@ -47,22 +47,22 @@ a{
 }
 .appBar{
     background-color: #5BAAFF;
-    width: 100%;
+    width: 95%;
     position: sticky;
-    bottom: 0;
-    left: 0;
-    border-radius: 20px 20px 0px 0px;
+    bottom: 20px;
+    left: 10px;
+    border-radius: 50px;
+    padding: 10px 0px;
 }
 .cards-appBar{
     position: sticky;
-    bottom: 10px;
     left: 0;
-    padding-top: 20px;
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-around;
     align-items: end;
+    
 }
-.cards-appBar a{
-    margin-bottom: 20px;
+.cards-appBar img{
+    max-width: 50px;
 }

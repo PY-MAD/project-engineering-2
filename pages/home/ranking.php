@@ -1,6 +1,18 @@
 <?php
 $titlePage = "Home";
 include_once $_SERVER['DOCUMENT_ROOT'] . "/project_eng_2/template/navBar.php";
+include_once $_SERVER['DOCUMENT_ROOT'] . "/project_eng_2/template/checkLogged.php";
+include_once $_SERVER['DOCUMENT_ROOT'] . "/project_eng_2/db/connection.php";
+
+$typeOfMood = $_GET["ranking_type"];
+
+if($typeOfMood == "educational"){
+    $typeOfMood = "edu_rank";
+}elseif($typeOfMood == "random"){
+    $typeOfMood = "random_rank";
+}
+$q = $mysqli->query("SELECT $typeOfMood.score , users.name FROM $typeOfMood , users where user_id = users.id");
+$users = $q->fetch_all(MYSQLI_ASSOC);
 
 ?>
 <link rel="stylesheet" href="../../css/index.css">
@@ -41,28 +53,40 @@ include_once $_SERVER['DOCUMENT_ROOT'] . "/project_eng_2/template/navBar.php";
     <!-- main -->
     <main>
         <div class="topBar">
-            <a class="active">educational</a>
-            <a class="">random</a>
-            <a class="">costume</a>
+            <?php if($typeOfMood == "edu_rank"): ?>
+                <a class="active" href="?ranking_type=educational">educational</a>
+            <?php else: ?>
+                <a class="" href="?ranking_type=educational">educational</a>
+            <?php endif ?>
+            <?php if($typeOfMood == "random_rank"): ?>
+                <a class="active" href="?ranking_type=random">random</a>
+            <?php else: ?>
+                <a class="" href="?ranking_type=random">random</a>
+            <?php endif ?>
         </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Rank</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php 
+                $i = 0;
+                foreach($users as $user): ?>
+                <tr>
+                    <th scope="row"><?php echo  ++$i ?></th>
+                    <td><?php echo $user["name"] ?></td>
+                    <td><?php echo  $user["score"] ?></td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
     </main>
 </div>
-<div class="appBar">
-    <div class="cards-appBar">
-        <a href="setting.php">
-            <img class="white" src="../../assets/appBar/setting.svg" alt="">
-        </a>
-        <a href="ranking.php?ranking_type=educational"  style="margin-bottom: 15px;">
-            <img class="white"src="../../assets/appBar/ranking.svg" alt="">
-        </a>
-        <a href="home.php">
-            <img class="white" src="../../assets/appBar/play.svg" alt="">
-        </a>
-        <a href="user.php">
-            <img class="white" src="../../assets/appBar/user.svg" alt="">
-        </a>
-    </div>
-</div>
+<?php include_once "appBar.php" ?>
 <script>
     let ranking_type = document.querySelectorAll(".topBar a");
     ranking_type.forEach((item)=>{
