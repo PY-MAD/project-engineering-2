@@ -1,15 +1,30 @@
-name: 'CI'
+name: CI/CD Pipeline
+
 on:
+  push:
+    branches:
+      - main
   pull_request:
+    branches:
+      - main
+
 jobs:
-  build-test:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2         # checkout the repo
-      - run: npm ci                       # install packages
-      - run: npm test                     # run tests (configured to use jest-junit reporter)
-      - uses: actions/upload-artifact@v2  # upload test results
-        if: success() || failure()        # run this step even if previous step failed
-        with:
-          name: test-results
-          path: jest-junit.xml
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.0'
+
+    - name: Validate composer.json and composer.lock
+      run: composer validate --strict
+
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-progress
+
+    # Additional steps can be added here
